@@ -54,22 +54,44 @@ const getSingleUser = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error: any) {
-    res.status(500).json({
+    res.status(404).json({
       success: false,
-      message: 'User not found',
+      message: error.message || 'Something went wrong',
       error: {
         code: 404,
-        description: 'User not found',
+        description: error.message || 'Something went wrong',
       },
     });
   }
 };
 
+////update user TODO
 
+const deleteUser = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params;
+    const result = await UserService.deleteUserFromDB(Number(userId));
 
+    res.status(200).json({
+      success: true,
+      message: 'User deleted successfully!',
+      data: null,
+    });
+  } catch (error: any) {
+    res.status(404).json({
+      success: false,
+      message: error.message || 'Something went wrong',
+      error: {
+        code: 404,
+        description: error.message || 'Something went wrong',
+      },
+    });
+  }
+};
 
 export const UserController = {
   createUser,
   getAllUsers,
   getSingleUser,
+  deleteUser
 };
