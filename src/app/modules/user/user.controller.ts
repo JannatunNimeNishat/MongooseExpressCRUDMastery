@@ -65,6 +65,9 @@ const getSingleUser = async (req: Request, res: Response) => {
   }
 };
 
+
+
+
 export const UserController = {
   createUser,
   getAllUsers,
