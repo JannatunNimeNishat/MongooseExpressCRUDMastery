@@ -25,29 +25,48 @@ const createUser = async (req: Request, res: Response) => {
   }
 };
 
+const getAllUsers = async (req: Request, res: Response) => {
+  try {
+    const result = await UserService.getAllUsersFromDB();
 
-const getAllUsers =  async (req: Request, res: Response) => {
-    try {
+    res.status(200).json({
+      success: true,
+      message: 'Users fetched successfully!',
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message || 'something went wrong',
+      error: error,
+    });
+  }
+};
 
-        const result = await UserService.getAllUsersFromDB();
+const getSingleUser = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params;
+    const result = await UserService.getSingleUsersFromDB(Number(userId));
 
-        res.status(200).json({
-            success: true,
-            message: 'Users fetched successfully!',
-            data: result,
-          });
-    } catch (error:any) {
-        res.status(500).json({
-            success: false,
-            message: error.message || 'something went wrong',
-            error: error,
-          });
-    }
-
-}
-
+    res.status(200).json({
+      success: true,
+      message: 'Users fetched successfully!',
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: 'User not found',
+      error: {
+        code: 404,
+        description: 'User not found',
+      },
+    });
+  }
+};
 
 export const UserController = {
   createUser,
-  getAllUsers
+  getAllUsers,
+  getSingleUser,
 };

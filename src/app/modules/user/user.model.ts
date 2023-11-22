@@ -109,10 +109,10 @@ userSchema.post('save', async function (doc, next) {
   next();
 });
 
-//isUserExixts method definiation
+//isUserExists method definition
 userSchema.statics.isUserExists = async function (userId: number) {
   const existingUser = await User.findOne({ userId: userId });
   return existingUser;
 };
 
-export const User = model<TUser>('User', userSchema);
+export const User = model<TUser, UserModel>('User', userSchema);
