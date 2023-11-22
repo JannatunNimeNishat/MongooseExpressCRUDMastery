@@ -1,6 +1,7 @@
 import { Schema, model } from 'mongoose';
 import { TAddress, TFullName, TOrder, TUser } from './user.interface';
-
+import bcrypt from 'bcrypt';
+import config from '../../config';
 const fullName = new Schema<TFullName>({
   firstName: {
     type: String,
@@ -46,25 +47,63 @@ const userSchema = new Schema<TUser>({
   userId: {
     type: Number,
     required: [true, 'userId is required'],
-    unique: true,trim: true
+    unique: true,
+    trim: true,
   },
   username: {
     type: String,
     required: [true, 'username is required'],
-    unique: true,trim: true
+    unique: true,
+    trim: true,
   },
-  password: { type: String, required: [true, 'password is required'] ,trim: true},
-  fullName: { type: fullName, required: [true, 'fullName is required'],trim: true },
-  age: { type: Number, required: [true, 'age is required'] ,trim: true},
-  email: { type: String, required: [true, 'email is required'],trim: true },
+  password: {
+    type: String,
+    // required: [true, 'password is required'],
+    required: false,
+    trim: true,
+  },
+  fullName: {
+    type: fullName,
+    required: [true, 'fullName is required'],
+    trim: true,
+  },
+  age: { type: Number, required: [true, 'age is required'], trim: true },
+  email: { type: String, required: [true, 'email is required'], trim: true },
   isActive: {
     type: Boolean,
     required: [true, 'isActive is required'],
     default: true,
   },
-  hobbies: { type: [String], required: [true, 'hobbies is required'],trim: true },
-  address: { type: address, required: [true, 'address is required'],trim: true },
+  hobbies: {
+    type: [String],
+    required: [true, 'hobbies is required'],
+    trim: true,
+  },
+  address: {
+    type: address,
+    required: [true, 'address is required'],
+    trim: true,
+  },
   orders: { type: [order] },
 });
+
+//hashing the password field
+userSchema.pre('save', async function (next) {
+  if (this.password) {
+    this.password = await bcrypt.hash(this.password, Number(config.salt_round));
+  }
+  next();
+});
+
+//removing the password field from the response
+userSchema.post('save', async function (doc, next) {
+   
+  if (doc.password) {
+    delete doc.password;
+  }
+  next();
+});
+
+
 
 export const User = model<TUser>('User', userSchema);

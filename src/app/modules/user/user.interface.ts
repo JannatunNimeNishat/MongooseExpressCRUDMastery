@@ -18,7 +18,7 @@ export type TOrder = {
 export type TUser = {
   userId: number;
   username: string;
-  password: string;
+  password?: string;
   fullName: TFullName;
   age: number;
   email: string;
