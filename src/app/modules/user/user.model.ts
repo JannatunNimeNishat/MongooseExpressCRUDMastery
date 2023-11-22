@@ -32,7 +32,11 @@ const userSchema = new Schema<TUser>({
   fullName: { type: fullName, required: [true, 'fullName is required'] },
   age: { type: Number, required: [true, 'age is required'] },
   email: { type: String, required: [true, 'email is required'] },
-  isActive: { type: Boolean, required: [true, 'isActive is required'] },
+  isActive: {
+    type: Boolean,
+    required: [true, 'isActive is required'],
+    default: true,
+  },
   hobbies: { type: [String], required: [true, 'hobbies is required'] },
   address: { type: address, required: [true, 'address is required'] },
   orders: { type: [order], required: [true, 'order is required'] },
