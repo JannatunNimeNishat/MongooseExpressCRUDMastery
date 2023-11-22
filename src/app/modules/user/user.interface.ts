@@ -1,4 +1,3 @@
-
 export type TFullName = {
   firstName: string;
   lastName: string;
@@ -10,20 +9,21 @@ export type TAddress = {
   country: string;
 };
 
-// type TOrders<{productName:string,price: number,quantity: number}> = {}
-export type TOrders<T> = Array<T>;
+export type TOrder = {
+  productName: string;
+  price: number;
+  quantity: number;
+};
 
 export type TUser = {
-  userId: string;
+  userId: number;
   username: string;
   password: string;
   fullName: TFullName;
   age: number;
   email: string;
-  isActive: string;
+  isActive: boolean;
   hobbies: string[];
   address: TAddress;
-  orders?: TOrders<{ productName: string; price: number; quantity: number }>;
+  orders?: TOrder[];
 };
-
-
