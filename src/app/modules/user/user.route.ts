@@ -6,7 +6,8 @@ const router = express.Router();
 router.post('/', UserController.createUser);
 router.get('/', UserController.getAllUsers);
 router.get('/:userId', UserController.getSingleUser);
-//update user TODO
+router.put('/:userId', UserController.updateUserInfo);
+
 router.delete('/:userId', UserController.deleteUser);
 //orders
 router.put('/:userId/orders', UserController.addNewProductOrder);

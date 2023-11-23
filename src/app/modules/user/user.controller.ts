@@ -66,7 +66,32 @@ const getSingleUser = async (req: Request, res: Response) => {
   }
 };
 
-////update user TODO
+const updateUserInfo = async (req: Request, res: Response) => {
+  try {
+    const userData = req.body;
+    const {userId} = req.params;
+
+    //validating using zod
+    const zodValidatedUserData = userValidationSchema.parse(userData);
+
+    const result = await UserService.updateUserInfoFromDB(
+      Number(userId),
+      zodValidatedUserData,
+    );
+
+    res.status(200).json({
+      success: true,
+      message: 'User updated successfully!',
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message || 'something went wrong',
+      error: error,
+    });
+  }
+};
 
 const deleteUser = async (req: Request, res: Response) => {
   try {
@@ -141,14 +166,15 @@ const getSingleUserOrders = async (req: Request, res: Response) => {
 const getSingleUserOrdersTotalPrice = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
-    const result = await UserService.getSingleUserOrdersTotalPriceFromDB(Number(userId));
+    const result = await UserService.getSingleUserOrdersTotalPriceFromDB(
+      Number(userId),
+    );
 
     res.status(200).json({
       success: true,
       message: 'Total price calculated successfully!',
       data: result,
     });
- 
   } catch (error: any) {
     res.status(404).json({
       success: false,
@@ -161,11 +187,11 @@ const getSingleUserOrdersTotalPrice = async (req: Request, res: Response) => {
   }
 };
 
-
 export const UserController = {
   createUser,
   getAllUsers,
   getSingleUser,
+  updateUserInfo,
   deleteUser,
   addNewProductOrder,
   getSingleUserOrders,

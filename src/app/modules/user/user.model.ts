@@ -64,8 +64,8 @@ const userSchema = new Schema<TUser, UserModel>({
   },
   password: {
     type: String,
-    // required: [true, 'password is required'],
-    required: false,
+    required: [true, 'password is required'],
+    //required: false,
     trim: true,
   },
   fullName: {
@@ -101,18 +101,38 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
+/* userSchema.pre('save', async function (next) {
+  if (this.isModified('password')) {
+    this.password = await bcrypt.hash(this.password, Number(config.salt_round));
+    next();
+  }
+
+  console.log(this.password);
+  next();
+}); */
+
+
+
 //removing the password field from the response
-userSchema.post('save', async function (doc, next) {
+/* userSchema.post('save', async function (doc, next) {
   if (doc.password) {
     delete doc.password;
   }
+
   next();
-});
+}); */
+
 
 //isUserExists method definition
 userSchema.statics.isUserExists = async function (userId: number) {
   const existingUser = await User.findOne({ userId: userId });
   return existingUser;
+};
+
+//password encryption method definition
+userSchema.statics.passwordEncryption = async function (password: string) {
+  const encryptedPassword = await bcrypt.hash(password, Number(config.salt_round));
+  return encryptedPassword;
 };
 
 export const User = model<TUser, UserModel>('User', userSchema);

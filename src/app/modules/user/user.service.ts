@@ -7,8 +7,9 @@ const createUserIntoDB = async (userData: TUser) => {
   }
 
   const result = await User.create(userData);
+  const { password, ...resultWithOutPassword } = result.toObject();
 
-  return result;
+  return resultWithOutPassword;
 };
 
 const getAllUsersFromDB = async () => {
@@ -35,6 +36,23 @@ const getSingleUsersFromDB = async (userId: number) => {
       hobbies: 1,
       address: 1,
       _id: 0,
+    },
+  );
+  return result;
+};
+
+const updateUserInfoFromDB = async (userId: number, userData: TUser) => {
+  if (!(await User.isUserExists(userId))) {
+    throw new Error('User not found!');
+  }
+
+  const encryptedPassword = await User.passwordEncryption(userData.password);
+  userData.password = encryptedPassword;
+
+  const result = await User.updateOne(
+    { userId: userId },
+    {
+      ...userData,
     },
   );
   return result;
@@ -121,4 +139,5 @@ export const UserService = {
   addNewProductOrderIntoDB,
   getSingleUserOrdersFromDB,
   getSingleUserOrdersTotalPriceFromDB,
+  updateUserInfoFromDB,
 };

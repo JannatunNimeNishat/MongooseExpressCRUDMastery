@@ -20,7 +20,7 @@ export type TOrder = {
 export type TUser = {
   userId: number;
   username: string;
-  password?: string;
+  password: string;
   fullName: TFullName;
   age: number;
   email: string;
@@ -32,4 +32,5 @@ export type TUser = {
 
 export interface UserModel extends Model<TUser> {
   isUserExists(userId: number): Promise<TUser | null>;
+  passwordEncryption(password:string):Promise<string>;
 }
