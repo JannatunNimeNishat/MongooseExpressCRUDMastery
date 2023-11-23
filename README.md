@@ -1,65 +1,112 @@
-# User Management API
+# Express CRUD API with MongoDB
 
-This API is developed using Express.js, Mongoose, TypeScript, 'zod' for validation, CORS, Bcrypt, Dotenv, ESLint, and Prettier. It provides endpoints for user management, including user creation, retrieval, updating, and deletion, as well as managing user orders.
+This is a simple Express.js application with CRUD (Create, Read, Update, Delete) operations using MongoDB for user management. It also includes functionality for handling user orders.
 
-## API Endpoints
+## Table of Contents
 
-### 1. Create User
+- [Endpoints](#endpoints)
+- [Technologies Used](#technologies-used)
+- [Setup](#setup)
+- [Usage](#usage)
+- [License](#license)
 
-- **Method:** POST
-- **Endpoint:** `https://assignment-2-mongoose-express-crudm-astery.vercel.app/api/users`
-- **Description:** Create a new user by providing the required information in the request body.
+## Endpoints
 
-### 2. Get All Users
+1. **Create User**
 
-- **Method:** GET
-- **Endpoint:** `https://assignment-2-mongoose-express-crudm-astery.vercel.app/api/users`
-- **Description:** Retrieve a list of all users.
+   - Method: POST
+   - Endpoint: `https://assignment-2-mongoose-express-crudm-astery.vercel.app/api/users`
 
-### 3. Get Single User
+2. **Get All Users**
 
-- **Method:** GET
-- **Endpoint:** `http://localhost:5000/api/users/6`
-- **Description:** Retrieve information about a specific user by providing the user ID in the endpoint.
+   - Method: GET
+   - Endpoint: `https://assignment-2-mongoose-express-crudm-astery.vercel.app/api/users`
 
-### 4. Delete User
+3. **Get Single User**
 
-- **Method:** DELETE
-- **Endpoint:** `https://assignment-2-mongoose-express-crudm-astery.vercel.app/api/users/6`
-- **Description:** Delete a user by providing the user ID in the endpoint.
+   - Method: GET
+   - Endpoint: `http://localhost:5000/api/users/{userId}`
 
-### 5. Add New Product in Order
+4. **Delete User**
 
-- **Method:** PUT
-- **Endpoint:** `https://assignment-2-mongoose-express-crudm-astery.vercel.app/api/users/1/orders`
-- **Description:** Add a new product to the order of a specific user by providing the user ID in the endpoint.
+   - Method: DELETE
+   - Endpoint: `https://assignment-2-mongoose-express-crudm-astery.vercel.app/api/users/{userId}`
 
-### 6. Get Single User Orders
+5. **Add New Product in Order**
 
-- **Method:** GET
-- **Endpoint:** `https://assignment-2-mongoose-express-crudm-astery.vercel.app/api/users/3/orders`
-- **Description:** Retrieve the orders for a specific user by providing the user ID in the endpoint.
+   - Method: PUT
+   - Endpoint: `https://assignment-2-mongoose-express-crudm-astery.vercel.app/api/users/{userId}/orders`
 
-### 7. Get Single User Orders Total Price
+6. **Get Single User Orders**
 
-- **Method:** GET
-- **Endpoint:** `https://assignment-2-mongoose-express-crudm-astery.vercel.app/api/users/3/orders/total-price`
-- **Description:** Retrieve the total price of all orders for a specific user by providing the user ID in the endpoint.
+   - Method: GET
+   - Endpoint: `https://assignment-2-mongoose-express-crudm-astery.vercel.app/api/users/{userId}/orders`
 
-### 8. Update User Info
+7. **Get Single User Orders Total Price**
 
-- **Method:** PUT
-- **Endpoint:** `https://assignment-2-mongoose-express-crudm-astery.vercel.app/api/users/1`
-- **Description:** Update the information of a specific user by providing the user ID in the endpoint.
+   - Method: GET
+   - Endpoint: `https://assignment-2-mongoose-express-crudm-astery.vercel.app/api/users/{userId}/orders/total-price`
 
-## Getting Started
+8. **Update User Info**
+   - Method: PUT
+   - Endpoint: `https://assignment-2-mongoose-express-crudm-astery.vercel.app/api/users/{userId}`
 
-Follow the instructions in the [Getting Started](#getting-started) section to clone the repository, install dependencies, set up environment variables, and run the development server.
+## Impotent Links
+
+1. **Live Link**
+   - Live Link: `https://assignment-2-mongoose-express-crudm-astery.vercel.app`
+
+2. **Github Code**
+   - Live Link: `https://github.com/JannatunNimeNishat/MongooseExpressCRUDMastery`
+
+
+## Technologies Used
+
+- Express.js
+- Mongoose
+- TypeScript
+- Zod (for validation)
+- CORS
+- Bcrypt
+- Dotenv
+- ESLint
+- Prettier
+
+## Usage
+
+1. Install dependencies: `npm install`
+2. Set up MongoDB database and configure connection in `.env` file.
+3. Run the application: `npm start`
+4. Access the API at `http://localhost:your-port/`
+
+## Setup
+
+1. **Clone the repository.**
+   ```bash
+   git clone https://github.com/JannatunNimeNishat/MongooseExpressCRUDMastery
+   ```
+
+## Project Usage
+
+1. Install dependencies: `npm install`
+2. Configure MongoDB connection in `.env` file.
+3. Run the application: `npm start`
+4. Access the API at `http://localhost:your-port/`
+
+## Validation
+
+Incoming data is validated using Joi/Zod in the `validation.middleware.ts` to ensure data integrity.
 
 ## Contributing
 
-Contributions are welcome! Feel free to open issues or submit pull requests.
+Contributions are welcome! Please fork the repository and create a pull request.
 
-## License
+## Configuration
 
-This project is licensed under the [MIT License](LICENSE).
+Ensure to set up the MongoDB connection details in the `.env` file.
+
+```env
+DB_CONNECTION_STRING=your-mongodb-connection-string
+PORT=your-app-port
+
+```
