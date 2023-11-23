@@ -89,9 +89,34 @@ const deleteUser = async (req: Request, res: Response) => {
   }
 };
 
+const addNewProductOrder = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params;
+    const productData = req.body;
+    const result = await UserService.addNewProductOrderIntoDB(Number(userId),productData);
+    
+    res.status(200).json({
+      success: true,
+      message: 'Order created successfully!',
+      data: null,
+    });
+  } catch (error: any) {
+    res.status(404).json({
+      success: false,
+      message: error.message || 'Something went wrong',
+      error: {
+        code: 404,
+        description: error.message || 'Something went wrong',
+      },
+    });
+  }
+};
+
+
 export const UserController = {
   createUser,
   getAllUsers,
   getSingleUser,
-  deleteUser
+  deleteUser,
+  addNewProductOrder,
 };
