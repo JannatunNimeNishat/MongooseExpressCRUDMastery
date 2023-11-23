@@ -54,11 +54,11 @@ This is a simple Express.js application with CRUD (Create, Read, Update, Delete)
 ## Impotent Links
 
 1. **Live Link**
+
    - Live Link: `https://assignment-2-mongoose-express-crudm-astery.vercel.app`
 
 2. **Github Code**
    - Live Link: `https://github.com/JannatunNimeNishat/MongooseExpressCRUDMastery`
-
 
 ## Technologies Used
 
@@ -96,10 +96,6 @@ This is a simple Express.js application with CRUD (Create, Read, Update, Delete)
 ## Validation
 
 Incoming data is validated using Joi/Zod in the `validation.middleware.ts` to ensure data integrity.
-
-## Contributing
-
-Contributions are welcome! Please fork the repository and create a pull request.
 
 ## Configuration
 
