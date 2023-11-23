@@ -93,8 +93,11 @@ const addNewProductOrder = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
     const productData = req.body;
-    const result = await UserService.addNewProductOrderIntoDB(Number(userId),productData);
-    
+    const result = await UserService.addNewProductOrderIntoDB(
+      Number(userId),
+      productData,
+    );
+
     res.status(200).json({
       success: true,
       message: 'Order created successfully!',
@@ -112,6 +115,27 @@ const addNewProductOrder = async (req: Request, res: Response) => {
   }
 };
 
+const getSingleUserOrders = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params;
+    const result = await UserService.getSingleUserOrdersFromDB(Number(userId));
+
+    res.status(200).json({
+      success: true,
+      message: 'Order fetched successfully!',
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(404).json({
+      success: false,
+      message: error.message || 'Something went wrong',
+      error: {
+        code: 404,
+        description: error.message || 'Something went wrong',
+      },
+    });
+  }
+};
 
 export const UserController = {
   createUser,
@@ -119,4 +143,5 @@ export const UserController = {
   getSingleUser,
   deleteUser,
   addNewProductOrder,
+  getSingleUserOrders,
 };

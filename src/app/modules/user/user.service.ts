@@ -56,16 +56,30 @@ const addNewProductOrderIntoDB = async (
   if (!(await User.isUserExists(userId))) {
     throw new Error('User not found!');
   }
-  console.log(productData);
+
   const result = await User.updateOne(
     { userId: userId },
     {
       $push: {
-        orders: {...productData},
+        orders: { ...productData },
       },
     },
   );
-  console.log(result);
+
+  return result;
+};
+
+const getSingleUserOrdersFromDB = async (userId: number) => {
+  if (!(await User.isUserExists(userId))) {
+    throw new Error('User not found!');
+  }
+  const result = await User.findOne(
+    { userId: userId },
+    {
+      orders: 1,
+      _id: 0,
+    },
+  );
   return result;
 };
 
@@ -75,4 +89,5 @@ export const UserService = {
   getSingleUsersFromDB,
   deleteUserFromDB,
   addNewProductOrderIntoDB,
+  getSingleUserOrdersFromDB,
 };

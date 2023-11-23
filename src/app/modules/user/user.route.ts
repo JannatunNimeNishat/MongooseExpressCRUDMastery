@@ -10,5 +10,6 @@ router.get('/:userId', UserController.getSingleUser);
 router.delete('/:userId', UserController.deleteUser);
 //orders
 router.put('/:userId/orders', UserController.addNewProductOrder);
+router.get('/:userId/orders', UserController.getSingleUserOrders)
 
 export default router;
