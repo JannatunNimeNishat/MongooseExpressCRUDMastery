@@ -8,7 +8,6 @@ This is a simple Express.js application with CRUD (Create, Read, Update, Delete)
 - [Technologies Used](#technologies-used)
 - [Setup](#setup)
 - [Usage](#usage)
-- [License](#license)
 
 ## Endpoints
 
