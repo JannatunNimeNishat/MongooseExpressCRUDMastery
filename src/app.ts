@@ -1,4 +1,4 @@
-import express, { NextFunction, Request, Response } from 'express';
+import express, { Request, Response } from 'express';
 import cors from 'cors';
 import userRouter from './app/modules/user/user.route';
 
@@ -11,15 +11,15 @@ app.use(express.json());
 //user router
 app.use('/api/users', userRouter);
 
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
   res.send('Hello World!');
 });
 
-app.all("*",(req:Request,res:Response)=>{
+app.all('*', (req: Request, res: Response) => {
   res.status(400).json({
-    success:false,
-    message:'Route not found'
-  })
-})
+    success: false,
+    message: 'Route not found',
+  });
+});
 
 export default app;

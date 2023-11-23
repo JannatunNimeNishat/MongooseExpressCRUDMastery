@@ -69,7 +69,7 @@ const getSingleUser = async (req: Request, res: Response) => {
 const updateUserInfo = async (req: Request, res: Response) => {
   try {
     const userData = req.body;
-    const {userId} = req.params;
+    const { userId } = req.params;
 
     //validating using zod
     const zodValidatedUserData = userValidationSchema.parse(userData);
@@ -173,7 +173,7 @@ const getSingleUserOrdersTotalPrice = async (req: Request, res: Response) => {
     res.status(200).json({
       success: true,
       message: 'Total price calculated successfully!',
-      data: result,
+      data: result || { totalPrice: 0 },
     });
   } catch (error: any) {
     res.status(404).json({

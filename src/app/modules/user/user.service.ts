@@ -117,7 +117,9 @@ const getSingleUserOrdersTotalPriceFromDB = async (userId: number) => {
     {
       $group: {
         _id: null,
-        totalPrice: { $sum: '$orders.price' },
+        totalPrice: {
+          $sum: { $multiply: ['$orders.price', '$orders.quantity'] },
+        },
       },
     },
     {
@@ -128,7 +130,7 @@ const getSingleUserOrdersTotalPriceFromDB = async (userId: number) => {
     },
   ]);
 
-  return result;
+  return result[0];
 };
 
 export const UserService = {
