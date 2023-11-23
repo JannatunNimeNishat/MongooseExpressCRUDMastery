@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from 'express';
 import { UserService } from './user.service';
 import userValidationSchema from './user.validation';
@@ -137,6 +138,30 @@ const getSingleUserOrders = async (req: Request, res: Response) => {
   }
 };
 
+const getSingleUserOrdersTotalPrice = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params;
+    const result = await UserService.getSingleUserOrdersTotalPriceFromDB(Number(userId));
+
+    res.status(200).json({
+      success: true,
+      message: 'Total price calculated successfully!',
+      data: result,
+    });
+ 
+  } catch (error: any) {
+    res.status(404).json({
+      success: false,
+      message: error.message || 'Something went wrong',
+      error: {
+        code: 404,
+        description: error.message || 'Something went wrong',
+      },
+    });
+  }
+};
+
+
 export const UserController = {
   createUser,
   getAllUsers,
@@ -144,4 +169,5 @@ export const UserController = {
   deleteUser,
   addNewProductOrder,
   getSingleUserOrders,
+  getSingleUserOrdersTotalPrice,
 };
