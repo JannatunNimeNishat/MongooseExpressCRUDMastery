@@ -1,13 +1,14 @@
-# Express CRUD API with MongoDB
+# Express CRUD API with MongoDB and Mongoose
 
-This is a simple Express.js application with CRUD (Create, Read, Update, Delete) operations using MongoDB for user management. It also includes functionality for handling user orders.
+This is a Express.js application with CRUD (Create, Read, Update, Delete) operations using MongoDB and Mongoose for user management. It also includes functionality for handling user orders.
 
 ## Table of Contents
 
 - [Endpoints](#endpoints)
 - [Technologies Used](#technologies-used)
+- [Getting Started](#getting-started)
 - [Setup](#setup)
-- [Usage](#usage)
+- [Usage](#project-usage)
 
 ## Endpoints
 
@@ -26,29 +27,31 @@ This is a simple Express.js application with CRUD (Create, Read, Update, Delete)
    - Method: GET
    - Endpoint: `http://localhost:5000/api/users/{userId}`
 
-4. **Delete User**
+4. **Update User Info**
+   - Method: PUT
+   - Endpoint: `https://assignment-2-mongoose-express-crudm-astery.vercel.app/api/users/{userId}`
+
+5. **Delete User**
 
    - Method: DELETE
    - Endpoint: `https://assignment-2-mongoose-express-crudm-astery.vercel.app/api/users/{userId}`
 
-5. **Add New Product in Order**
+6. **Add New Product in Order**
 
    - Method: PUT
    - Endpoint: `https://assignment-2-mongoose-express-crudm-astery.vercel.app/api/users/{userId}/orders`
 
-6. **Get Single User Orders**
+7. **Get Single User Orders**
 
    - Method: GET
    - Endpoint: `https://assignment-2-mongoose-express-crudm-astery.vercel.app/api/users/{userId}/orders`
 
-7. **Get Single User Orders Total Price**
+8. **Get Single User Orders Total Price**
 
    - Method: GET
    - Endpoint: `https://assignment-2-mongoose-express-crudm-astery.vercel.app/api/users/{userId}/orders/total-price`
 
-8. **Update User Info**
-   - Method: PUT
-   - Endpoint: `https://assignment-2-mongoose-express-crudm-astery.vercel.app/api/users/{userId}`
+
 
 ## Impotent Links
 
@@ -71,12 +74,15 @@ This is a simple Express.js application with CRUD (Create, Read, Update, Delete)
 - ESLint
 - Prettier
 
-## Usage
 
-1. Install dependencies: `npm install`
-2. Set up MongoDB database and configure connection in `.env` file.
-3. Run the application: `npm start`
-4. Access the API at `http://localhost:your-port/`
+## Getting Started
+
+Follow these instructions to get a copy of the project up and running on your local machine.
+
+### Prerequisites
+
+- Node.js 
+- npm or yarn
 
 ## Setup
 
@@ -89,7 +95,7 @@ This is a simple Express.js application with CRUD (Create, Read, Update, Delete)
 
 1. Install dependencies: `npm install`
 2. Configure MongoDB connection in `.env` file.
-3. Run the application: `npm start`
+3. Run the application: `npm run start:dev`
 4. Access the API at `http://localhost:your-port/`
 
 ## Validation
