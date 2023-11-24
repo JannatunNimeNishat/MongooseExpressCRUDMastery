@@ -107,7 +107,7 @@ Incoming data is validated using Joi/Zod in the `validation.middleware.ts` to en
 Ensure to set up the MongoDB connection details in the `.env` file.
 
 ```env
-DB_CONNECTION_STRING=your-mongodb-connection-string
+DB_URL=your-mongodb-connection-string
 PORT=your-app-port
-
+SALT_ROUNDS=salt_rounds
 ```
