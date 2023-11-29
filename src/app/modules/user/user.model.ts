@@ -109,8 +109,8 @@ userSchema.pre('save', async function (next) {
 
   console.log(this.password);
   next();
-}); */
-
+});
+ */
 
 
 //removing the password field from the response
@@ -118,7 +118,6 @@ userSchema.pre('save', async function (next) {
   if (doc.password) {
     delete doc.password;
   }
-
   next();
 }); */
 

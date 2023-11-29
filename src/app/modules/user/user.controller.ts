@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from 'express';
 import { UserService } from './user.service';
-import userValidationSchema from './user.validation';
+import { userZodValidation } from './user.validation';
+
 
 const createUser = async (req: Request, res: Response) => {
   try {
     const userData = req.body;
 
     //validating using zod
-    const zodValidatedUserData = userValidationSchema.parse(userData);
+    const zodValidatedUserData = userZodValidation.userValidationSchema.parse(userData);
 
     const result = await UserService.createUserIntoDB(zodValidatedUserData);
 
@@ -72,7 +73,8 @@ const updateUserInfo = async (req: Request, res: Response) => {
     const { userId } = req.params;
 
     //validating using zod
-    const zodValidatedUserData = userValidationSchema.parse(userData);
+    // const zodValidatedUserData = userValidationSchema.parse(userData);
+    const zodValidatedUserData = userZodValidation.updateUserValidationSchema.parse(userData);
 
     const result = await UserService.updateUserInfoFromDB(
       Number(userId),

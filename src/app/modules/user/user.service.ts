@@ -41,20 +41,33 @@ const getSingleUsersFromDB = async (userId: number) => {
   return result;
 };
 
-const updateUserInfoFromDB = async (userId: number, userData: TUser) => {
+const updateUserInfoFromDB = async (
+  userId: number,
+  userData: Partial<TUser>,
+) => {
   if (!(await User.isUserExists(userId))) {
     throw new Error('User not found!');
   }
 
-  const encryptedPassword = await User.passwordEncryption(userData.password);
-  userData.password = encryptedPassword;
+  if (userData.password) {
+    const encryptedPassword = await User.passwordEncryption(
+      userData.password as string,
+    );
+    userData.password = encryptedPassword;
+  }
 
-  const result = await User.updateOne(
+  
+
+  const result = await User.findOneAndUpdate({ userId: userId }, userData, {
+    new: true,
+  });
+
+  /* const result = await User.updateOne(
     { userId: userId },
     {
       ...userData,
     },
-  );
+  ); */
   return result;
 };
 

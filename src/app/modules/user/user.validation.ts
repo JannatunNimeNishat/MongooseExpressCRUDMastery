@@ -28,7 +28,24 @@ const userValidationSchema = z.object({
   isActive: z.boolean(),
   hobbies: z.array(z.string()),
   address: addressValidationSchema,
-  orders: z.array(orderValidationSchema),
+  orders: z.array(orderValidationSchema).optional(),
 });
 
-export default userValidationSchema;
+const updateUserValidationSchema = z.object({
+  userId: z.number().int(),
+  username: z.string().optional(),
+  password: z.string().optional(),
+  fullName: fullNameValidationSchema.optional(),
+  age: z.number().int().optional(),
+  email: z.string().email().optional(),
+  isActive: z.boolean().optional(),
+  hobbies: z.array(z.string()).optional(),
+  address: addressValidationSchema.optional(),
+  orders: z.array(orderValidationSchema).optional(),
+});
+
+// export default userValidationSchema;
+export const userZodValidation = {
+  userValidationSchema,
+  updateUserValidationSchema
+}
