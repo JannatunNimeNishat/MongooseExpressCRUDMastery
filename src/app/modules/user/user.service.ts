@@ -63,7 +63,7 @@ const updateUserInfoFromDB = async (
   });
 
   if(result){
-    const { password, ...resultWithOutPassword } = result.toObject();
+    const { password,_id,orders, ...resultWithOutPassword } = result.toObject();
     return resultWithOutPassword;
   }
 
