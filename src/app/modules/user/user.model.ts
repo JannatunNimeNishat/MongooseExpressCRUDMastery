@@ -67,6 +67,7 @@ const userSchema = new Schema<TUser, UserModel>({
     required: [true, 'password is required'],
     //required: false,
     trim: true,
+    //select: false, // Exclude password from queries by default
   },
   fullName: {
     type: fullName,
@@ -101,20 +102,26 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
-/* userSchema.pre('save', async function (next) {
-  if (this.isModified('password')) {
-    this.password = await bcrypt.hash(this.password, Number(config.salt_round));
-    next();
-  }
 
-  console.log(this.password);
+/* userSchema.pre('save', async function (next) {
+  if (this.password && this.isModified('password')) {
+    this.password = await bcrypt.hash(this.password, Number(config.salt_round));
+  }
   next();
-});
- */
+}); */
 
 
 //removing the password field from the response
 /* userSchema.post('save', async function (doc, next) {
+  if (doc.password) {
+   delete doc.password;
+
+  }
+  next();
+}); */
+
+// Remove the password field from the response
+/* userSchema.post(['save', 'findOneAndUpdate'], async function (doc, next) {
   if (doc.password) {
     delete doc.password;
   }

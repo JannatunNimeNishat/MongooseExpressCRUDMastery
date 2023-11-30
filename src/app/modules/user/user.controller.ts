@@ -37,10 +37,13 @@ const getAllUsers = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error: any) {
-    res.status(500).json({
+    res.status(404).json({
       success: false,
       message: error.message || 'something went wrong',
-      error: error,
+      error: {
+        code:404,
+        description:error.message || 'something went wrong'
+      },
     });
   }
 };
@@ -73,7 +76,6 @@ const updateUserInfo = async (req: Request, res: Response) => {
     const { userId } = req.params;
 
     //validating using zod
-    // const zodValidatedUserData = userValidationSchema.parse(userData);
     const zodValidatedUserData = userZodValidation.updateUserValidationSchema.parse(userData);
 
     const result = await UserService.updateUserInfoFromDB(
@@ -87,10 +89,13 @@ const updateUserInfo = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error: any) {
-    res.status(500).json({
+    res.status(404).json({
       success: false,
-      message: error.message || 'something went wrong',
-      error: error,
+      message: error.message || 'Something went wrong',
+      error: {
+        code: 404,
+        description: error.message || 'Something went wrong',
+      },
     });
   }
 };

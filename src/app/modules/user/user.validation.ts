@@ -32,7 +32,7 @@ const userValidationSchema = z.object({
 });
 
 const updateUserValidationSchema = z.object({
-  userId: z.number().int(),
+  userId: z.number().int().optional(),
   username: z.string().optional(),
   password: z.string().optional(),
   fullName: fullNameValidationSchema.optional(),

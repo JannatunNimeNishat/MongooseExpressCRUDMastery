@@ -8,8 +8,8 @@ const createUserIntoDB = async (userData: TUser) => {
 
   const result = await User.create(userData);
   const { password, ...resultWithOutPassword } = result.toObject();
-
   return resultWithOutPassword;
+
 };
 
 const getAllUsersFromDB = async () => {
@@ -62,13 +62,11 @@ const updateUserInfoFromDB = async (
     new: true,
   });
 
-  /* const result = await User.updateOne(
-    { userId: userId },
-    {
-      ...userData,
-    },
-  ); */
-  return result;
+  if(result){
+    const { password, ...resultWithOutPassword } = result.toObject();
+    return resultWithOutPassword;
+  }
+
 };
 
 const deleteUserFromDB = async (userId: number) => {
