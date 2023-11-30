@@ -90,7 +90,7 @@ const userSchema = new Schema<TUser, UserModel>({
     required: [true, 'address is required'],
     trim: true,
   },
-  orders: { type: [order] },
+  orders: { type: [order],default: undefined },
 });
 
 //hashing the password field
